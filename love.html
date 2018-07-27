@@ -1,48 +1,64 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>测试</title>
-		<style>
-		canvas{
-			background: lawngreen;//画布背景色
-			  }
-		</style>
-	</head>
+<head>
+<meta charset="utf-8">
+<title>JS心型线</title>
+<style>
+div{
+  position:absolute;
+}
+.xx-box{
+  left:50%;
+  top:50%;
+  margin-left:-250px;
+  margin-top:-250px;
+  width:500px;
+  height:500px;
+  background-color:#000;
+}
+.xx-box .text{
+  top:30%;
+  height:48px;
+  line-height:48px;
+  color:#f00;
+  text-shadow: 3px 3px 4px #f00;
+  font-size:36px;
+  font-weight:bold;
+  width:100%;
+  text-align:center;
+  font-family:Tangerine,Tahoma,Arial,"\65f6\5c1a\4e2d\9ed1\7b80\4f53","\5b8b\4f53";
+}
+.xx-box .item{
+  width:2px;
+  height:20px;
+  overflow:hidden;
+}
+</style>
+</head>
 <body>
-	<canvas id="gycanvas" width="300" height="300" ></canvas>
-	<script>
-	    //铺满屏幕
-		var width = document.documentElement.clientWidth;
-		var height = document.documentElement.clientHeight;
-		document.getElementById("gycanvas").setAttribute("width",width);
-        document.getElementById("gycanvas").setAttribute("height",height);
- 
-		//开始画  
-		var x0 = width/2;
-		var y0 = height/2;
-		var context = document.getElementById("gycanvas").getContext("2d");
-		context.fillStyle = "red"; 　
-        var x,y;
-			/* matlab
-			t=linspace(-6,6,1000);  
-			x=16*(sin(t)).^3;  
-			y=13*cos(t)-5*cos(2*t)-2*cos(3*t)-cos(4*t);
-			x=x*100;
-			y=y*100;
-			plot(x,y);  
-			*/
-		for(var t=-3; t<=3; t=t+0.001)
-		{
-			x=16*Math.pow(Math.sin(t),3);
-			y=13*Math.cos(t)-5*Math.cos(t*2)-2*Math.cos(t*3)-Math.cos(t*4);
-			//增大心
-			x=x*16;
-			y=y*16;
-			//画点    屏幕中心为原点  
-			context.fillRect(x+x0,y0-y,1,1);
-		}
-	</script>
+<div class="xx-box" id="xx-box">
+  <div class="text">I Love You</div>
+</div>
+<script>
+function createPoint(x,y,c){
+  var div = document.createElement("div");
+  div.className = "item";
+  div.style.left = x + "px";
+  div.style.top = y + "px";
+  div.style.backgroundColor = c;
+  document.getElementById("xx-box").appendChild(div);
+}
+function heartShape(r,dx,dy,c){//r:大小;dx:水平偏移;dy:垂直偏移;c:颜色
+  var m,n,x,y,i;
+  for(i = 0; i <= 200; i += 0.04){
+    m = i;
+    n = -r * (((Math.sin(i) * Math.sqrt(Math.abs(Math.cos(i)))) / (Math.sin(i) + 1.4)) - 2 * Math.sin(i) + 2);
+    x = n * Math.cos(m) + dx;
+    y = n * Math.sin(m) + dy;
+    createPoint(x,y,c);
+  }
+}
+heartShape(80,250,100,"#f00");
+</script>
 </body>
- 
 </html>
