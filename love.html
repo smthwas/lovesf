@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>测试</title>
+		<style>
+		canvas{
+			background: lawngreen;//画布背景色
+			  }
+		</style>
+	</head>
+<body>
+	<canvas id="gycanvas" width="300" height="300" ></canvas>
+	<script>
+	    //铺满屏幕
+		var width = document.documentElement.clientWidth;
+		var height = document.documentElement.clientHeight;
+		//gycanvas.setAttribute("width",width);
+        //gycanvas.setAttribute("height",height);
+		//DOM兼容性好
+		document.getElementById("gycanvas").setAttribute("width",width);
+        document.getElementById("gycanvas").setAttribute("height",height);
+ 
+		//开始画
+		var x0 = width/2;
+		var y0 = height/2;
+		var context = document.getElementById("gycanvas").getContext("2d");
+		context.fillStyle = "red"; 　
+        var x,y;
+		//循环
+		for(var xx = 0 ; xx<width ; xx++ )
+		{
+			for(var yy = 0 ; yy<height ; yy++ )
+			{
+				//以屏幕中心为原点
+                x=xx-x0;     
+				y=y0-yy;
+				//符合条件就画点
+				if(x*x+Math.pow(y-Math.pow(x*x,0.33333),2)<10100&&x*x+Math.pow(y-Math.pow(x*x,0.33333),2)>9900)
+				{
+					//在相应位置画点
+					context.fillRect(xx,yy,1,1);
+				}
+			}
+		}
+	</script>
+</body>
+ 
+</html>
