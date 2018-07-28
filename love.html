@@ -17,7 +17,7 @@ div{
   background-color:rgb(248, 193, 193);
 }
 .xx-box .text{
-  top:30%;
+  top:25%;
   height:48px;
   line-height:48px;
   color:rgb(242, 0, 255);
@@ -35,11 +35,20 @@ div{
 }
 </style>
 </head>
-<body>
-<div class="xx-box" id="xx-box">
-  <div class="text">I Love You,<br/>Maggie!</div>
+<body style="background-color: rgb(248, 193, 193)">
+<div class="xx-box" id="xx-box" onclick="switchText()">
+  <div id="texts" class="text">I Love You,<br/>Maggie!</div>
 </div>
 <script>
+var texts = ['I Love You,<br/>Maggie!', 'You Are My<br/>Sweetheart!', 'You are my today<br/>And all of<br/>My tomorrows'];
+var count = 0;
+function switchText() {
+  count++;
+  if (count >= 3) {
+    count = 0;
+  }
+  document.getElementById("texts").innerHTML = texts[count];
+}
 function createPoint(x,y,c){
   var div = document.createElement("div");
   div.className = "item";
